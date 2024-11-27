@@ -1,6 +1,6 @@
 {
-  "name": "@muybuen/type",
-  "version": "1.1.6",
+  "name": "@muybuen/retool-db-react",
+  "version": "1.0.0",
   "author": "John Choura",
   "license": "MIT",
   "main": "dist/index.js",
@@ -11,19 +11,27 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnchourajr/buen-type.git"
+    "url": "git+https://github.com/johnchourajr/retool-db-react.git"
   },
   "bugs": {
-    "url": "https://github.com/johnchourajr/buen-type/issues"
+    "url": "https://github.com/johnchourajr/retool-db-react/issues"
   },
-  "homepage": "https://github.com/johnchourajr/buen-type#readme",
+  "homepage": "https://github.com/johnchourajr/retool-db-react#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "prepublishOnly": "npm run build",
     "check-types": "tsc --noEmit"
   },
+  "peerDependencies": {
+    "react": "^18",
+    "react-dom": "^18",
+    "clsx": "^2.1.1"
+  },
   "devDependencies": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+     "clsx": "^2.1.1",
     "eslint": "^9.3.0",
     "js-tokens": "^4.0.0",
     "loose-envify": "^1.4.0",
