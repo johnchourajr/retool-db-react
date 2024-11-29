@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Command } from "commander";
 import { mkdirSync, writeFileSync } from "fs";
 import path from "path";

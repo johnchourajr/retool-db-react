@@ -31,5 +31,6 @@ export default defineConfig([
     sourcemap: true,
     platform: "node",
     noExternal: ["events"],
+    banner: { js: "#!/usr/bin/env node" },
   },
 ]);
