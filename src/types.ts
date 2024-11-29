@@ -1,23 +1,23 @@
-export interface RetoolDatabaseConfig {
+export type RetoolDatabaseConfig = {
   baseUrl?: string;
-}
+};
 
-export interface RetoolDatabaseOptions {
+export type RetoolDatabaseOptions = {
   query?: string;
   params?: unknown[];
   limit?: number;
-}
+};
 
 export type RetoolMutationType = "INSERT" | "UPDATE" | "DELETE";
 
-export interface RetoolMutation {
+export type RetoolMutation = {
   type: RetoolMutationType;
   data?: Record<string, unknown>;
   where?: Record<string, unknown>;
-}
+};
 
-export interface RetoolDatabaseError {
+export type RetoolDatabaseError = {
   message: string;
   code?: string;
   detail?: string;
-}
+};
