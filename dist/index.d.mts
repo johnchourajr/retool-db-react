@@ -1,4 +1,4 @@
-import { R as RetoolDatabaseOptions, a as RetoolDatabaseConfig, b as RetoolDatabaseError } from './types-2njni86U.js';
+import { R as RetoolDatabaseOptions, a as RetoolDatabaseConfig, b as RetoolDatabaseError } from './types-2njni86U.mjs';
 import { NextRequest, NextResponse } from 'next/server';
 
 declare function useRetoolDatabase<T>(tableName: string, options?: RetoolDatabaseOptions, config?: RetoolDatabaseConfig): {

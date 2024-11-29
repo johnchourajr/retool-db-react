@@ -114,6 +114,61 @@ const { data } = useRetoolDatabase<Users>(
 );
 ```
 
+## Server Usage
+
+### In Server Components
+
+```typescript
+import { queryRetoolDatabase } from '@muybuen/retool-db-react/server';
+
+// Server Component
+export default async function UsersPage() {
+  const users = await queryRetoolDatabase<User>('users', {
+    query: 'SELECT * FROM users WHERE active = $1',
+    params: [true]
+  });
+
+  return (
+    <ul>
+      {users.map(user => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### Hybrid Pattern (Server + Client)
+
+```typescript
+// app/users/page.tsx
+import { queryRetoolDatabase } from '@muybuen/retool-db-react/server';
+import { UserActions } from './actions';
+
+export default async function UsersPage() {
+  const users = await queryRetoolDatabase<User>('users');
+
+  return (
+    <div>
+      <ul>
+        {users.map(user => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+      <UserActions />
+    </div>
+  );
+}
+
+// app/users/actions.tsx
+"use client";
+import { useRetoolDatabase } from '@muybuen/retool-db-react';
+
+export function UserActions() {
+  const { insert } = useRetoolDatabase<User>('users');
+  return <button onClick={() => insert({ name: 'New User' })}>Add User</button>;
+}
+
 ## Type Generation
 
 Generate TypeScript types from your database schema using the included CLI:

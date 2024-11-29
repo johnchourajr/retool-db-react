@@ -1,7 +1,4 @@
-"use strict";
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
@@ -17,19 +14,6 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var __async = (__this, __arguments, generator) => {
   return new Promise((resolve, reject) => {
     var fulfilled = (value) => {
@@ -51,24 +35,16 @@ var __async = (__this, __arguments, generator) => {
   });
 };
 
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  retoolDbHandler: () => retoolDbHandler,
-  useRetoolDatabase: () => useRetoolDatabase
-});
-module.exports = __toCommonJS(src_exports);
-
 // src/hooks/useRetoolDatabase.ts
-var import_react = require("react");
-var import_zod = require("zod");
+import { useCallback, useEffect, useState } from "react";
+import { z } from "zod";
 function useRetoolDatabase(tableName, options, config = {}) {
   const baseUrl = config.baseUrl || "/api/retool-db";
-  const [data, setData] = (0, import_react.useState)(null);
-  const [isLoading, setIsLoading] = (0, import_react.useState)(false);
-  const [error, setError] = (0, import_react.useState)(null);
-  const [schema, setSchema] = (0, import_react.useState)(null);
-  const fetchData = (0, import_react.useCallback)(() => __async(this, null, function* () {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [schema, setSchema] = useState(null);
+  const fetchData = useCallback(() => __async(this, null, function* () {
     setIsLoading(true);
     setError(null);
     try {
@@ -93,7 +69,7 @@ function useRetoolDatabase(tableName, options, config = {}) {
       try {
         schema.partial().parse(newData);
       } catch (err) {
-        if (err instanceof import_zod.z.ZodError) {
+        if (err instanceof z.ZodError) {
           throw new Error(
             `Validation error: ${err.errors.map((e) => e.message).join(", ")}`
           );
@@ -132,7 +108,7 @@ function useRetoolDatabase(tableName, options, config = {}) {
       try {
         schema.partial().parse(updateData);
       } catch (err) {
-        if (err instanceof import_zod.z.ZodError) {
+        if (err instanceof z.ZodError) {
           throw new Error(
             `Validation error: ${err.errors.map((e) => e.message).join(", ")}`
           );
@@ -210,7 +186,7 @@ function useRetoolDatabase(tableName, options, config = {}) {
       setIsLoading(false);
     }
   });
-  (0, import_react.useEffect)(() => {
+  useEffect(() => {
     fetchData();
   }, [fetchData]);
   return {
@@ -225,9 +201,9 @@ function useRetoolDatabase(tableName, options, config = {}) {
 }
 
 // src/lib/retoolDbHandler.ts
-var import_server = require("next/server");
-var import_pg = require("pg");
-var pool = new import_pg.Pool({
+import { NextResponse } from "next/server";
+import { Pool } from "pg";
+var pool = new Pool({
   connectionString: process.env.RETOOL_DATABASE_URL,
   max: 20,
   idleTimeoutMillis: 3e4,
@@ -240,20 +216,20 @@ function handleSelect(tableName, body) {
         text: body.query,
         values: body.params || []
       });
-      return import_server.NextResponse.json(result2.rows);
+      return NextResponse.json(result2.rows);
     }
     const result = yield pool.query({
       text: `SELECT * FROM "${tableName}" LIMIT $1`,
       values: [body.limit || 100]
     });
-    return import_server.NextResponse.json(result.rows);
+    return NextResponse.json(result.rows);
   });
 }
 function retoolDbHandler(_0, _1) {
   return __async(this, arguments, function* (req, { params }) {
     var _a;
     if (!["GET", "POST", "PUT", "DELETE"].includes(req.method || "")) {
-      return import_server.NextResponse.json({ error: "Method not allowed" }, { status: 405 });
+      return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
     }
     const { tableName } = params;
     try {
@@ -280,7 +256,7 @@ function retoolDbHandler(_0, _1) {
         [tableName]
       );
       if (!tableExists.rows[0].exists) {
-        return import_server.NextResponse.json(
+        return NextResponse.json(
           { error: `Table '${tableName}' does not exist` },
           { status: 404 }
         );
@@ -298,7 +274,7 @@ function retoolDbHandler(_0, _1) {
             RETURNING *
           `;
             const result = yield pool.query(query, values);
-            return import_server.NextResponse.json(result.rows[0]);
+            return NextResponse.json(result.rows[0]);
           }
           return handleSelect(tableName, body);
         }
@@ -324,7 +300,7 @@ function retoolDbHandler(_0, _1) {
             ...Object.values(mutation.where)
           ];
           const result = yield pool.query(query, values);
-          return import_server.NextResponse.json(result.rows);
+          return NextResponse.json(result.rows);
         }
         case "DELETE": {
           const { mutation } = body;
@@ -340,17 +316,17 @@ function retoolDbHandler(_0, _1) {
           RETURNING *
         `;
           const result = yield pool.query(query, Object.values(mutation.where));
-          return import_server.NextResponse.json(result.rows);
+          return NextResponse.json(result.rows);
         }
         default:
-          return import_server.NextResponse.json(
+          return NextResponse.json(
             { error: "Method not allowed" },
             { status: 405 }
           );
       }
     } catch (error) {
       console.error("Database error:", error);
-      return import_server.NextResponse.json(
+      return NextResponse.json(
         {
           error: error instanceof Error ? error.message : "Unknown error",
           code: error == null ? void 0 : error.code,
@@ -361,9 +337,8 @@ function retoolDbHandler(_0, _1) {
     }
   });
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
+export {
   retoolDbHandler,
   useRetoolDatabase
-});
-//# sourceMappingURL=index.js.map
+};
+//# sourceMappingURL=index.mjs.map

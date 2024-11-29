@@ -1,11 +1,20 @@
 {
   "name": "@muybuen/retool-db-react",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "John Choura",
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./server": {
+      "import": "./dist/server.mjs",
+      "require": "./dist/server.js",
+      "types": "./dist/server.d.ts"
+    }
+  },
   "bin": {
     "retool-db-types": "./dist/cli.js"
   },
@@ -23,7 +32,8 @@
   },
   "homepage": "https://github.com/johnchourajr/retool-db-react#readme",
   "scripts": {
-    "build": "tsc",
+    "build": "tsup",
+    "dev": "tsup --watch",
     "prepublishOnly": "npm run build",
     "check-types": "tsc --noEmit",
     "test": "jest"
@@ -55,6 +65,7 @@
     "js-tokens": "^4.0.0",
     "loose-envify": "^1.4.0",
     "prettier": "^3.2.5",
+    "tsup": "^8.3.5",
     "typescript": "^5.4.5"
   },
   "publishConfig": {
