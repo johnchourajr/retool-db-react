@@ -3,7 +3,6 @@ import { defineConfig } from "tsup";
 
 export default defineConfig([
   {
-    // Client bundle (includes hooks and client files)
     entry: ["src/client.ts"],
     format: ["esm", "cjs"],
     dts: true,
@@ -11,9 +10,9 @@ export default defineConfig([
     external: ["react", "react-dom", "next"],
     outDir: "dist",
     sourcemap: true,
+    noExternal: ["events"],
   },
   {
-    // Server bundle (includes server utilities)
     entry: ["src/server.ts"],
     format: ["esm", "cjs"],
     dts: true,
@@ -21,9 +20,9 @@ export default defineConfig([
     outDir: "dist",
     sourcemap: true,
     platform: "node",
+    noExternal: ["events"],
   },
   {
-    // CLI bundle
     entry: ["src/cli.ts"],
     format: ["cjs"],
     dts: true,
@@ -31,5 +30,6 @@ export default defineConfig([
     outDir: "dist",
     sourcemap: true,
     platform: "node",
+    noExternal: ["events"],
   },
 ]);
