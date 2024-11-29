@@ -27,13 +27,14 @@ async function handleSelect(tableName: string, body: any) {
 
 export async function retoolDbHandler(
   req: NextRequest,
-  { params }: { params: { tableName: string } },
+  context: { params: { tableName: string } | Promise<{ tableName: string }> },
 ) {
   if (!["GET", "POST", "PUT", "DELETE"].includes(req.method || "")) {
     return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
   }
 
-  const { tableName } = params;
+  const { tableName } =
+    "then" in context.params ? await context.params : context.params;
 
   try {
     // Validate table name format

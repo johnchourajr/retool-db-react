@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@muybuen/retool-db-react": "^1.1.6",
+    "@muybuen/retool-db-react": "^1.1.7",
     "@muybuen/type": "^1.1.6",
     "@tailwindcss/container-queries": "^0.1.1",
     "clsx": "^2.1.1",
