@@ -1,13 +1,18 @@
 {
   "name": "@muybuen/retool-db-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "John Choura",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "retool-db-types": "./dist/cli.js"
+  },
   "files": [
-    "dist/"
+    "dist/",
+    "README.md",
+    "LICENSE"
   ],
   "repository": {
     "type": "git",
@@ -18,24 +23,41 @@
   },
   "homepage": "https://github.com/johnchourajr/retool-db-react#readme",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "prepublishOnly": "npm run build",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test": "jest"
+  },
+  "keywords": [
+    "react",
+    "retool",
+    "postgresql",
+    "database",
+    "hooks",
+    "nextjs"
+  ],
+  "dependencies": {
+    "commander": "^12.1.0",
+    "pg": "^8.11.0",
+    "react": "^18",
+    "zod": "^3.23.8"
   },
   "peerDependencies": {
+    "next": "^14.0.0",
     "react": "^18",
-    "react-dom": "^18",
-    "clsx": "^2.1.1"
+    "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/pg": "^8.11.10",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-     "clsx": "^2.1.1",
     "eslint": "^9.3.0",
     "js-tokens": "^4.0.0",
     "loose-envify": "^1.4.0",
     "prettier": "^3.2.5",
     "typescript": "^5.4.5"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

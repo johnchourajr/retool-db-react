@@ -1,0 +1,11 @@
+.git
+.github
+node_modules
+src
+tests
+examples
+*.log
+tsconfig.json
+.env
+.env.*
+muybuen-retool-db-react-*

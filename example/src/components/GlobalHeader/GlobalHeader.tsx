@@ -61,23 +61,23 @@ export function GlobalHeader() {
           animate={scrolled ? "hidden" : "initial"}
         >
           <div className="col-span-full flex w-full gap-4 items-center justify-center">
-            <GlobalHeaderCopyButton text={"npm i @muybuen/type"} />
+            <GlobalHeaderCopyButton text={"npm i @muybuen/retool-db-react"} />
             <Link
-              href={"https://www.npmjs.com/package/@muybuen/type"}
+              href={"https://www.npmjs.com/package/@muybuen/retool-db-react"}
               className="uppercase text-body"
               target="_blank"
             >
               <Image src={"/npm.svg"} width={30} height={16} alt={"npm"} />
             </Link>
-            <Link
+            {/* <Link
               href={"https://jsr.io/@muybuen/type"}
               className="uppercase text-body"
               target="_blank"
             >
               <Image src={"/jsr.svg"} width={30} height={16} alt={"jsr"} />
-            </Link>
+            </Link> */}
             <Link
-              href={"https://github.com/johnchourajr/buen-type"}
+              href={"https://github.com/johnchourajr/retool-db-react"}
               className="uppercase text-body"
               target="_blank"
             >
@@ -96,12 +96,14 @@ export function GlobalHeader() {
             animate={scrolled ? "hidden" : "initial"}
           >
             <div className="col-span-full border-b-1 pb-3 border-[--color-primary]">
-              <h1 className="uppercase text-string ">@muybuen/type</h1>
+              <h1 className="uppercase text-string ">
+                @muybuen/retool-db-react
+              </h1>
             </div>
             <div className="col-span-full">
               <p className="text-body max-w-[15em]">
-                A Tailwind CSS Plugin for creating and managing good typography
-                systems
+                A React hook and utilities for easily working with Retool
+                PostgreSQL databases in Next.js apps.
               </p>
             </div>
           </motion.div>

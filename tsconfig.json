@@ -1,17 +1,19 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": "src",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "target": "ES6",
     "module": "ESNext",
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "declaration": true, // Generate .d.ts files for TypeScript types
-    "sourceMap": true,   // Generate source maps
+    "declaration": true,
+    "sourceMap": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["./node_modules/@types", "./next-env.d.ts"]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist", "tests"]
 }

@@ -19,8 +19,8 @@
 }
 
 :root {
-  --color-primary: 0, 255, 10;
-  --color-primary-hex: #00ff0a;
+  --color-primary: 0, 229, 255;
+  --color-primary-hex: #00e5ff;
   --color-secondary: 0, 0, 0;
   --color-secondary-hex: #000000;
 }
