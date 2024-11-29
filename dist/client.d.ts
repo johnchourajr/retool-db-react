@@ -1,5 +1,3 @@
-import { NextRequest, NextResponse } from 'next/server';
-
 type RetoolDatabaseConfig = {
     baseUrl?: string;
 };
@@ -24,10 +22,4 @@ declare function useRetoolDatabase<T>(tableName: string, options?: RetoolDatabas
     refetch: () => Promise<void>;
 };
 
-declare function retoolDbHandler(req: NextRequest, { params }: {
-    params: {
-        tableName: string;
-    };
-}): Promise<NextResponse<any>>;
-
-export { retoolDbHandler, useRetoolDatabase };
+export { useRetoolDatabase };
