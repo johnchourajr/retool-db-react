@@ -1,5 +1,18 @@
-import { R as RetoolDatabaseOptions, a as RetoolDatabaseConfig, b as RetoolDatabaseError } from './types-2njni86U.js';
 import { NextRequest, NextResponse } from 'next/server';
+
+type RetoolDatabaseConfig = {
+    baseUrl?: string;
+};
+type RetoolDatabaseOptions = {
+    query?: string;
+    params?: unknown[];
+    limit?: number;
+};
+type RetoolDatabaseError = {
+    message: string;
+    code?: string;
+    detail?: string;
+};
 
 declare function useRetoolDatabase<T>(tableName: string, options?: RetoolDatabaseOptions, config?: RetoolDatabaseConfig): {
     data: T[] | null;

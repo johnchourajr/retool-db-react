@@ -51,13 +51,13 @@ var __async = (__this, __arguments, generator) => {
   });
 };
 
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
+// src/client.ts
+var client_exports = {};
+__export(client_exports, {
   retoolDbHandler: () => retoolDbHandler,
   useRetoolDatabase: () => useRetoolDatabase
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(client_exports);
 
 // src/hooks/useRetoolDatabase.ts
 var import_react = require("react");
@@ -366,4 +366,4 @@ function retoolDbHandler(_0, _1) {
   retoolDbHandler,
   useRetoolDatabase
 });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=client.js.map
