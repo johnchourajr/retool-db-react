@@ -1,8 +1,7 @@
 "use client";
 
-// import { useRetoolDatabase } from "@muybuen/retool-db-react";
-
-import { useRetoolDatabase } from "../../../../src/hooks/useRetoolDatabase";
+import { useRetoolDatabase } from "@muybuen/retool-db-react";
+// import { useRetoolDatabase } from "../../../../src/hooks/useRetoolDatabase";
 
 export function DatabaseList({ data: initialData }: { data: any }) {
   const { data, isLoading, insert } = useRetoolDatabase("buen_table");
