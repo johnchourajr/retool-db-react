@@ -158,7 +158,6 @@ function retoolDbHandler(req, context) {
           const query = `
           DELETE FROM "${tableName}"
           WHERE ${whereColumns.join(" AND ")}
-          RETURNING *
         `;
           const result = yield pool.query(query, Object.values(mutation.where));
           return import_server.NextResponse.json(result.rows);
