@@ -138,7 +138,6 @@ export async function retoolDbHandler(
         const query = `
           DELETE FROM "${tableName}"
           WHERE ${whereColumns.join(" AND ")}
-          RETURNING *
         `;
 
         const result = await pool.query(query, Object.values(mutation.where));

@@ -1,5 +1,10 @@
 // /app/api/retool-db/[tableName]/route.ts
-import { retoolDbHandler } from "../../../../../../src/lib/retoolDbHandler";
-// import { retoolDbHandler } from "@muybuen/retool-db-react";
+// import { retoolDbHandler } from "../../../../../../src/lib/retoolDbHandler";
+import { retoolDbHandler } from "@muybuen/retool-db-react/server";
 
-export { retoolDbHandler as GET, retoolDbHandler as POST };
+export {
+  retoolDbHandler as DELETE,
+  retoolDbHandler as GET,
+  retoolDbHandler as POST,
+  retoolDbHandler as PUT,
+};
