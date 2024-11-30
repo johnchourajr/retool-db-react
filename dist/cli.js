@@ -131,7 +131,8 @@ function generateTypes(options, spinner) {
         spinner.succeed("Types generated successfully!");
       }
     } catch (error) {
-      spinner.fail(error.message);
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      spinner.fail(errorMessage);
       process.exit(1);
     } finally {
       yield pool.end();
@@ -149,7 +150,8 @@ Examples:
   try {
     yield generateTypes(options, spinner);
   } catch (error) {
-    spinner.fail(error.message);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    spinner.fail(errorMessage);
     process.exit(1);
   }
 }));
