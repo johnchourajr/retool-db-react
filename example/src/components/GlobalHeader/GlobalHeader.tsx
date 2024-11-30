@@ -101,7 +101,7 @@ export function GlobalHeader() {
               </h1>
             </div>
             <div className="col-span-full">
-              <p className="text-body max-w-[15em]">
+              <p className="text-body max-w-[20em]">
                 A React hook and utilities for easily working with Retool
                 PostgreSQL databases in Next.js apps.
               </p>

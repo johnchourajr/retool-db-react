@@ -2,13 +2,14 @@ import { buenTypeTailwind } from "@muybuen/type";
 import containerQueries from "@tailwindcss/container-queries";
 import type { Config } from "tailwindcss";
 import { PluginAPI } from "tailwindcss/types/config";
-import { customTexts } from "./src/config/type";
+import { customHeadline, customTexts } from "./src/config/type";
 
 function typePlugin({ addUtilities }: PluginAPI) {
   buenTypeTailwind(
     { addUtilities },
     {
       customTexts,
+      customHeadlines: customHeadline,
       disableDefaults: false,
       customMinScreenSize: 480,
     },
@@ -29,10 +30,6 @@ const config: Config = {
       "2": "2px",
       "3": "3px",
     },
-    color: {
-      foreground: "#00ff0a",
-      background: "#000000",
-    },
     extend: {
       spacing: {
         "0.05em": "0.05em",
@@ -51,6 +48,9 @@ const config: Config = {
         "1px": "1px",
         "2px": "2px",
         "3px": "3px",
+      },
+      colors: {
+        primary: "#00e5ff",
       },
       fontFamily: {
         bold: ["GoshaSans-Ultrabold", "sans-serif"],
