@@ -2,6 +2,13 @@
 
 <img width="1200" alt="og" src="https://github.com/user-attachments/assets/b7d52c88-5336-40f6-8d42-644afaf8f2b6">
 
+[![npm version](https://badge.fury.io/js/%40muybuen%2Fretool-db-react.svg)](https://badge.fury.io/js/%40muybuen%2Fretool-db-react)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![npm downloads](https://img.shields.io/npm/dm/@muybuen/retool-db-react.svg)](https://www.npmjs.com/package/@muybuen/retool-db-react)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/johnchourajr/retool-db-react/graphs/commit-activity)
+
 ----
 
 A TypeScript first React hook for working with Retool PostgreSQL databases in Next.js applications.
