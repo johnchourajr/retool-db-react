@@ -26,7 +26,7 @@ export default defineConfig([
     entry: ["src/cli.ts"],
     format: ["cjs"],
     dts: true,
-    external: ["pg", "commander", "fs", "path", "ora"],
+    external: ["pg", "commander", "fs", "path"],
     outDir: "dist",
     sourcemap: true,
     platform: "node",
