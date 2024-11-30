@@ -1,11 +1,11 @@
 import { Command } from "commander";
 import { mkdirSync, writeFileSync } from "fs";
-import ora from "ora";
+import ora, { Ora } from "ora";
 import path from "path";
 import { Pool } from "pg";
 import { generateTableTypes } from "./lib/schemaGenerator";
 
-async function generateTypes(options: any, spinner: ora.Ora) {
+async function generateTypes(options: any, spinner: Ora) {
   if (!options.url) {
     spinner.fail("Error: Database URL is required");
     process.exit(1);
@@ -45,8 +45,10 @@ async function generateTypes(options: any, spinner: ora.Ora) {
       writeFileSync(outputPath, typesContent);
       spinner.succeed("Types generated successfully!");
     }
-  } catch (error) {
-    spinner.fail(error.message);
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    spinner.fail(errorMessage);
     process.exit(1);
   } finally {
     await pool.end();
@@ -70,8 +72,10 @@ Examples:
     const spinner = ora("Starting...").start();
     try {
       await generateTypes(options, spinner);
-    } catch (error) {
-      spinner.fail(error.message);
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error";
+      spinner.fail(errorMessage);
       process.exit(1);
     }
   });

@@ -47,8 +47,8 @@
     "nextjs"
   ],
   "dependencies": {
+    "@types/ora": "^3.1.0",
     "commander": "^12.1.0",
-    "ora": "^8.1.1",
     "zod": "^3.23.8"
   },
   "peerDependencies": {
