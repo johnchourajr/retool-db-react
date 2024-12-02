@@ -3,9 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 declare function retoolDbHandler(req: NextRequest, context: {
     params: {
         tableName: string;
-    } | Promise<{
-        tableName: string;
-    }>;
+    };
 }): Promise<NextResponse<any>>;
 
 type RetoolDatabaseOptions = {
