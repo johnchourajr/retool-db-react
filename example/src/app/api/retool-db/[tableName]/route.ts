@@ -1,9 +1,7 @@
-// /app/api/retool-db/[tableName]/route.ts
+// app/api/retool-db/[tableName]/route.ts
 import { retoolDbHandler } from "@muybuen/retool-db-react/server";
 
-export {
-  retoolDbHandler as DELETE,
-  retoolDbHandler as GET,
-  retoolDbHandler as POST,
-  retoolDbHandler as PUT,
-};
+export const GET = retoolDbHandler;
+export const POST = retoolDbHandler;
+export const PUT = retoolDbHandler;
+export const DELETE = retoolDbHandler;

@@ -27,7 +27,7 @@ async function handleSelect(tableName: string, body: any) {
 
 export async function retoolDbHandler(
   req: NextRequest,
-  context: { params: { tableName: string } | Promise<{ tableName: string }> },
+  context: { params: { tableName: string } },
 ) {
   if (!["GET", "POST", "PUT", "DELETE"].includes(req.method || "")) {
     return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
