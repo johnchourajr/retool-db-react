@@ -26,15 +26,14 @@ async function handleSelect(tableName: string, body: any) {
 }
 
 export async function retoolDbHandler(
-  req: NextRequest,
-  context: { params: { tableName: string } },
-) {
-  if (!["GET", "POST", "PUT", "DELETE"].includes(req.method || "")) {
+  request: NextRequest,
+  { params }: { params: { tableName: string } },
+): Promise<Response> {
+  if (!["GET", "POST", "PUT", "DELETE"].includes(request.method || "")) {
     return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
   }
 
-  const { tableName } =
-    "then" in context.params ? await context.params : context.params;
+  const { tableName } = "then" in params ? await params : params;
 
   try {
     // Validate table name format
@@ -44,10 +43,10 @@ export async function retoolDbHandler(
 
     // Get request body with default empty object
     let body = {};
-    const contentType = req.headers.get("content-type");
+    const contentType = request.headers.get("content-type");
     if (contentType?.includes("application/json")) {
       try {
-        const text = await req.text();
+        const text = await request.text();
         body = text ? JSON.parse(text) : {};
       } catch (e) {
         console.warn("Failed to parse JSON body:", e);
@@ -72,7 +71,7 @@ export async function retoolDbHandler(
       );
     }
 
-    switch (req.method) {
+    switch (request.method) {
       case "POST": {
         if (
           (body as { mutation?: RetoolMutation }).mutation?.type === "INSERT"
