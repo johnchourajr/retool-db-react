@@ -16,11 +16,11 @@ export default defineConfig([
     entry: ["src/server.ts"],
     format: ["esm", "cjs"],
     dts: true,
-    external: ["pg", "react", "react-dom", "next"],
+    external: ["react", "react-dom", "next"],
     outDir: "dist",
     sourcemap: true,
     platform: "node",
-    noExternal: ["events"],
+    noExternal: ["events", "pg"],
   },
   {
     entry: ["src/cli.ts"],
