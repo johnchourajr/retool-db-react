@@ -26,11 +26,11 @@ export default defineConfig([
     entry: ["src/cli.ts"],
     format: ["cjs"],
     dts: true,
-    external: ["pg", "commander", "fs", "path"],
+    external: ["commander", "fs", "path"],
     outDir: "dist",
     sourcemap: true,
     platform: "node",
-    noExternal: ["events"],
+    noExternal: ["events", "pg"],
     banner: { js: "#!/usr/bin/env node" },
     esbuildOptions: (options) => {
       options.charset = "utf8";
