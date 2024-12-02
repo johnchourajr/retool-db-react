@@ -16,7 +16,7 @@ export default defineConfig([
     entry: ["src/server.ts"],
     format: ["esm", "cjs"],
     dts: true,
-    external: ["pg"],
+    external: ["pg", "react", "react-dom", "next"],
     outDir: "dist",
     sourcemap: true,
     platform: "node",
