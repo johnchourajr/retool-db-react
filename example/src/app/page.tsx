@@ -1,18 +1,17 @@
 import { DatabaseList } from "@/components/DatabaseList";
 import { DatabaseNumber } from "@/components/DatabaseNumber";
 import { MainLayout } from "@/components/MainLayout/MainLayout";
-import { queryRetoolDatabase } from "@muybuen/retool-db-react/server";
+import { getInitialData } from "./actions";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const initialData = await queryRetoolDatabase("buen_table");
-  const initialBuenNumber = await queryRetoolDatabase("buen_number");
+  const { initialTableData, initialBuenNumber } = await getInitialData();
 
   return (
     <MainLayout>
-      <DatabaseList data={initialData} />
+      <DatabaseList data={initialTableData} />
       <DatabaseNumber data={initialBuenNumber} />
     </MainLayout>
   );
