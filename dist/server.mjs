@@ -44,22 +44,22 @@ function handleSelect(tableName, body) {
     return NextResponse.json(result.rows);
   });
 }
-function retoolDbHandler(req, context) {
-  return __async(this, null, function* () {
+function retoolDbHandler(_0, _1) {
+  return __async(this, arguments, function* (request, { params }) {
     var _a;
-    if (!["GET", "POST", "PUT", "DELETE"].includes(req.method || "")) {
+    if (!["GET", "POST", "PUT", "DELETE"].includes(request.method || "")) {
       return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
     }
-    const { tableName } = "then" in context.params ? yield context.params : context.params;
+    const { tableName } = "then" in params ? yield params : params;
     try {
       if (!/^[a-zA-Z0-9_]+$/.test(tableName)) {
         throw new Error("Invalid table name format");
       }
       let body = {};
-      const contentType = req.headers.get("content-type");
+      const contentType = request.headers.get("content-type");
       if (contentType == null ? void 0 : contentType.includes("application/json")) {
         try {
-          const text = yield req.text();
+          const text = yield request.text();
           body = text ? JSON.parse(text) : {};
         } catch (e) {
           console.warn("Failed to parse JSON body:", e);
@@ -80,7 +80,7 @@ function retoolDbHandler(req, context) {
           { status: 404 }
         );
       }
-      switch (req.method) {
+      switch (request.method) {
         case "POST": {
           if (((_a = body.mutation) == null ? void 0 : _a.type) === "INSERT") {
             const { data } = body.mutation;

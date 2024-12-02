@@ -6,11 +6,11 @@ import clsx from "clsx";
 import { motion } from "framer-motion";
 import { SliceWrapper } from "../SliceWrapper";
 
-export function DatabaseNumber({ data: initialData }: { data: any }) {
+export function DatabaseNumber({ data: initialData }: { data?: any }) {
   const { data, isLoading, update } = useRetoolDatabase("buen_number");
 
   const items: Buen_number[] = data || initialData;
-  const total = items[0]?.total || 0;
+  const total = (!!data && items[0]?.total) || 0;
 
   const incrementTotal = async () => {
     await update({ id: items[0].id }, { total: (total || 0) + 1 });
@@ -29,7 +29,7 @@ export function DatabaseNumber({ data: initialData }: { data: any }) {
             isLoading && "opacity-5",
           )}
         >
-          {total}
+          {total || 0}
         </p>
         <p className="text-string mb-4">
           Total value in database{" "}

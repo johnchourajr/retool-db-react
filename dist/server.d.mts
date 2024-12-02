@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 
-declare function retoolDbHandler(req: NextRequest, context: {
+declare function retoolDbHandler(request: NextRequest, { params }: {
     params: {
         tableName: string;
     };
-}): Promise<NextResponse<any>>;
+}): Promise<Response>;
 
 type RetoolDatabaseOptions = {
     query?: string;

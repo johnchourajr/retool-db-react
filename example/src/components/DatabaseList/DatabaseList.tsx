@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { motion } from "framer-motion";
 import { SliceWrapper } from "../SliceWrapper";
 
-export function DatabaseList({ data: initialData }: { data: any }) {
+export function DatabaseList({ data: initialData }: { data?: any }) {
   const { data, isLoading, insert, remove } = useRetoolDatabase("buen_table");
 
   const items: Buen_table[] = data || initialData;
@@ -28,7 +28,7 @@ export function DatabaseList({ data: initialData }: { data: any }) {
             isLoading && "opacity-5",
           )}
         >
-          {items?.length}
+          {items?.length || 0}
         </p>
         <p className="text-string mb-4">
           Items in Retool Database{" "}
