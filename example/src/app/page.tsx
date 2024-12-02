@@ -3,6 +3,9 @@ import { DatabaseNumber } from "@/components/DatabaseNumber";
 import { MainLayout } from "@/components/MainLayout/MainLayout";
 import { queryRetoolDatabase } from "@muybuen/retool-db-react/server";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const initialData = await queryRetoolDatabase("buen_table");
   const initialBuenNumber = await queryRetoolDatabase("buen_number");
