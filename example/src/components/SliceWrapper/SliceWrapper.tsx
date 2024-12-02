@@ -5,7 +5,7 @@ export type SliceWrapperProps = {
   children: ReactNode;
   className?: string;
   innerClassName?: string;
-  title: string;
+  title?: string;
 };
 
 export function SliceWrapper({
@@ -21,7 +21,9 @@ export function SliceWrapper({
         className,
       )}
     >
-      <h2 className="text-string whitespace-pre col-span-full">{title}</h2>
+      {!!title && (
+        <h2 className="text-string whitespace-pre col-span-full">{title}</h2>
+      )}
       <div
         className={clsx(
           "relative grid grid-cols-subgrid col-span-full my-6",
