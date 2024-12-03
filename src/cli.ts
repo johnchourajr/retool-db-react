@@ -1,8 +1,27 @@
-import { Command } from "commander";
+import arg from "arg";
 import { mkdirSync, writeFileSync } from "fs";
 import path from "path";
 import postgres from "postgres";
 import { generateTableTypes } from "./lib/schemaGenerator";
+
+function printHelp() {
+  console.log(`
+retool-db-types - Generate TypeScript types from your Retool database
+
+Usage:
+  retool-db-types --url <url> [options]
+
+Options:
+  -u, --url <url>      Database connection URL (required)
+  -o, --output <path>  Output directory (default: "./src/types")
+  -t, --table <table>  Specific table to generate types for
+  -h, --help          Show this help message
+
+Examples:
+  retool-db-types --url="postgresql://..." --table=users
+  retool-db-types --url="postgresql://..." --output=./types
+`);
+}
 
 function printProgress(current: number, total: number) {
   const barWidth = 30;
@@ -14,7 +33,11 @@ function printProgress(current: number, total: number) {
   );
 }
 
-async function generateTypes(options: any) {
+async function generateTypes(options: {
+  url: string;
+  output: string;
+  table?: string;
+}) {
   if (!options.url) {
     console.error("Error: Database URL is required");
     process.exit(1);
@@ -72,20 +95,30 @@ async function generateTypes(options: any) {
   }
 }
 
-const program = new Command()
-  .name("retool-db-types")
-  .description("Generate TypeScript types from your Retool database")
-  .option("-u, --url <url>", "Database connection URL")
-  .option("-o, --output <path>", "Output directory", "./src/types")
-  .option("-t, --table <table>", "Specific table to generate types for")
-  .addHelpText(
-    "after",
-    `
-Examples:
-$ retool-db-types --url="postgresql://..." --table=users
-$ retool-db-types --url="postgresql://..." --output=./types
-`,
-  )
-  .action(generateTypes);
+function main() {
+  const args = arg({
+    "--help": Boolean,
+    "--url": String,
+    "--output": String,
+    "--table": String,
 
-program.parse();
+    // Aliases
+    "-h": "--help",
+    "-u": "--url",
+    "-o": "--output",
+    "-t": "--table",
+  });
+
+  if (args["--help"]) {
+    printHelp();
+    process.exit(0);
+  }
+
+  generateTypes({
+    url: args["--url"] || "",
+    output: args["--output"] || "./src/types",
+    table: args["--table"],
+  });
+}
+
+main();

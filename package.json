@@ -47,7 +47,7 @@
     "nextjs"
   ],
   "dependencies": {
-    "commander": "^12.1.0",
+    "arg": "^5.0.2",
     "postgres": "^3.4.5",
     "zod": "^3.23.8"
   },

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { z } from "zod";
+import { ZodError, ZodObject } from "zod"; // Import only the necessary parts of zod
 import type {
   RetoolDatabaseConfig,
   RetoolDatabaseError,
@@ -15,7 +15,7 @@ export function useRetoolDatabase<T>(
   const [data, setData] = useState<T[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<RetoolDatabaseError | null>(null);
-  const [schema, setSchema] = useState<z.ZodObject<any, any> | null>(null);
+  const [schema, setSchema] = useState<ZodObject<any, any> | null>(null);
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
@@ -45,7 +45,7 @@ export function useRetoolDatabase<T>(
       try {
         schema.partial().parse(newData);
       } catch (err) {
-        if (err instanceof z.ZodError) {
+        if (err instanceof ZodError) {
           throw new Error(
             `Validation error: ${err.errors.map((e) => e.message).join(", ")}`,
           );
@@ -86,7 +86,7 @@ export function useRetoolDatabase<T>(
       try {
         schema.partial().parse(updateData);
       } catch (err) {
-        if (err instanceof z.ZodError) {
+        if (err instanceof ZodError) {
           throw new Error(
             `Validation error: ${err.errors.map((e) => e.message).join(", ")}`,
           );

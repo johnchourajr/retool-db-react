@@ -26,7 +26,7 @@ export default defineConfig([
     entry: ["src/cli.ts"],
     format: ["cjs"],
     dts: true,
-    external: ["commander", "fs", "path"],
+    external: ["arg", "fs", "path"],
     outDir: "dist",
     sourcemap: true,
     platform: "node",
