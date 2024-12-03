@@ -1,15 +1,8 @@
 // app/api/retool-db/[tableName]/route.ts
-import { retoolDbHandler } from "@muybuen/retool-db-react/server";
-import { NextRequest } from "next/server";
+// import { retoolDbHandler } from "@muybuen/retool-db-react/server";
+import { retoolDbHandler } from "../../../../../../src/lib/retoolDbHandler";
 
-type RouteContext = { params: { tableName: string } };
-
-export async function handler(request: NextRequest, context: RouteContext) {
-  const params = await context.params;
-  return retoolDbHandler(request, { params });
-}
-
-export const GET = handler;
-export const POST = handler;
-export const PUT = handler;
-export const DELETE = handler;
+export const GET = retoolDbHandler;
+export const POST = retoolDbHandler;
+export const PUT = retoolDbHandler;
+export const DELETE = retoolDbHandler;
