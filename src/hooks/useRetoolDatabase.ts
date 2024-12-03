@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { ZodError, ZodObject } from "zod"; // Import only the necessary parts of zod
+import type { ZodError } from "zod";
 import type {
   RetoolDatabaseConfig,
   RetoolDatabaseError,
@@ -15,7 +15,6 @@ export function useRetoolDatabase<T>(
   const [data, setData] = useState<T[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<RetoolDatabaseError | null>(null);
-  const [schema, setSchema] = useState<ZodObject<any, any> | null>(null);
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
@@ -41,13 +40,13 @@ export function useRetoolDatabase<T>(
   }, [tableName, options, baseUrl]);
 
   const insert = async (newData: Partial<T>) => {
-    if (schema) {
+    if (config.validate) {
       try {
-        schema.partial().parse(newData);
+        await config.validate(newData);
       } catch (err) {
-        if (err instanceof ZodError) {
+        if (err && typeof err === "object" && "errors" in err) {
           throw new Error(
-            `Validation error: ${err.errors.map((e) => e.message).join(", ")}`,
+            `Validation error: ${(err as ZodError).errors.map((e) => e.message).join(", ")}`,
           );
         }
       }
@@ -82,13 +81,13 @@ export function useRetoolDatabase<T>(
   };
 
   const update = async (where: Partial<T>, updateData: Partial<T>) => {
-    if (schema) {
+    if (config.validate) {
       try {
-        schema.partial().parse(updateData);
+        await config.validate(updateData);
       } catch (err) {
-        if (err instanceof ZodError) {
+        if (err && typeof err === "object" && "errors" in err) {
           throw new Error(
-            `Validation error: ${err.errors.map((e) => e.message).join(", ")}`,
+            `Validation error: ${(err as ZodError).errors.map((e) => e.message).join(", ")}`,
           );
         }
       }

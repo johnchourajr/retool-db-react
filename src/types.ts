@@ -1,6 +1,7 @@
-export type RetoolDatabaseConfig = {
+export interface RetoolDatabaseConfig {
   baseUrl?: string;
-};
+  validate?: (data: any) => Promise<any> | any;
+}
 
 export type RetoolDatabaseOptions = {
   query?: string;
