@@ -1,0 +1,3 @@
+[submodule "retool-db-react-next-starter"]
+	path = retool-db-react-next-starter
+	url = git@github.com:johnchourajr/retool-db-react-next-starter.git
