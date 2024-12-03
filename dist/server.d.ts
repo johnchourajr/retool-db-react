@@ -1,17 +1,16 @@
 import { NextRequest } from 'next/server';
 
+declare function retoolDbHandler(req: NextRequest, { params }: {
+    params: Promise<{
+        tableName: string;
+    }>;
+}): Promise<Response>;
+
 type RetoolDatabaseOptions = {
     query?: string;
     params?: unknown[];
     limit?: number;
 };
-type RouteParams = {
-    params: {
-        tableName: string;
-    };
-};
-
-declare function retoolDbHandler(req: NextRequest, { params }: RouteParams): Promise<Response>;
 
 declare function queryRetoolDatabase<T>(tableName: string, options?: RetoolDatabaseOptions): Promise<T[]>;
 
