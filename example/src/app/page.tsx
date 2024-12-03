@@ -3,6 +3,9 @@ import { DatabaseNumber } from "@/components/DatabaseNumber";
 import { MainLayout } from "@/components/MainLayout/MainLayout";
 import { getInitialData } from "./actions";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const { initialTableData, initialBuenNumber } = await getInitialData();
 
