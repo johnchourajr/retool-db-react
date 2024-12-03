@@ -60,13 +60,11 @@ module.exports = __toCommonJS(client_exports);
 
 // src/hooks/useRetoolDatabase.ts
 var import_react = require("react");
-var import_zod = require("zod");
 function useRetoolDatabase(tableName, options, config = {}) {
   const baseUrl = config.baseUrl || "/api/retool-db";
   const [data, setData] = (0, import_react.useState)(null);
   const [isLoading, setIsLoading] = (0, import_react.useState)(false);
   const [error, setError] = (0, import_react.useState)(null);
-  const [schema, setSchema] = (0, import_react.useState)(null);
   const fetchData = (0, import_react.useCallback)(() => __async(this, null, function* () {
     setIsLoading(true);
     setError(null);
@@ -88,11 +86,11 @@ function useRetoolDatabase(tableName, options, config = {}) {
     }
   }), [tableName, options, baseUrl]);
   const insert = (newData) => __async(this, null, function* () {
-    if (schema) {
+    if (config.validate) {
       try {
-        schema.partial().parse(newData);
+        yield config.validate(newData);
       } catch (err) {
-        if (err instanceof import_zod.z.ZodError) {
+        if (err && typeof err === "object" && "errors" in err) {
           throw new Error(
             `Validation error: ${err.errors.map((e) => e.message).join(", ")}`
           );
@@ -127,11 +125,11 @@ function useRetoolDatabase(tableName, options, config = {}) {
     }
   });
   const update = (where, updateData) => __async(this, null, function* () {
-    if (schema) {
+    if (config.validate) {
       try {
-        schema.partial().parse(updateData);
+        yield config.validate(updateData);
       } catch (err) {
-        if (err instanceof import_zod.z.ZodError) {
+        if (err && typeof err === "object" && "errors" in err) {
           throw new Error(
             `Validation error: ${err.errors.map((e) => e.message).join(", ")}`
           );

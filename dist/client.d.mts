@@ -1,6 +1,7 @@
-type RetoolDatabaseConfig = {
+interface RetoolDatabaseConfig {
     baseUrl?: string;
-};
+    validate?: (data: any) => Promise<any> | any;
+}
 type RetoolDatabaseOptions = {
     query?: string;
     params?: unknown[];

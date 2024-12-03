@@ -62,7 +62,7 @@ var __async = (__this, __arguments, generator) => {
 };
 
 // src/cli.ts
-var import_commander = require("commander");
+var import_arg = __toESM(require("arg"));
 var import_fs2 = require("fs");
 var import_path = __toESM(require("path"));
 
@@ -2260,6 +2260,24 @@ function generateTableTypes(tableName, sql) {
 }
 
 // src/cli.ts
+function printHelp() {
+  console.log(`
+retool-db-types - Generate TypeScript types from your Retool database
+
+Usage:
+  retool-db-types --url <url> [options]
+
+Options:
+  -u, --url <url>      Database connection URL (required)
+  -o, --output <path>  Output directory (default: "./src/types")
+  -t, --table <table>  Specific table to generate types for
+  -h, --help          Show this help message
+
+Examples:
+  retool-db-types --url="postgresql://..." --table=users
+  retool-db-types --url="postgresql://..." --output=./types
+`);
+}
 function printProgress(current, total) {
   const barWidth = 30;
   const progress = Math.round(current / total * barWidth);
@@ -2319,13 +2337,27 @@ function generateTypes(options) {
     }
   });
 }
-var program = new import_commander.Command().name("retool-db-types").description("Generate TypeScript types from your Retool database").option("-u, --url <url>", "Database connection URL").option("-o, --output <path>", "Output directory", "./src/types").option("-t, --table <table>", "Specific table to generate types for").addHelpText(
-  "after",
-  `
-Examples:
-$ retool-db-types --url="postgresql://..." --table=users
-$ retool-db-types --url="postgresql://..." --output=./types
-`
-).action(generateTypes);
-program.parse();
+function main() {
+  const args = (0, import_arg.default)({
+    "--help": Boolean,
+    "--url": String,
+    "--output": String,
+    "--table": String,
+    // Aliases
+    "-h": "--help",
+    "-u": "--url",
+    "-o": "--output",
+    "-t": "--table"
+  });
+  if (args["--help"]) {
+    printHelp();
+    process.exit(0);
+  }
+  generateTypes({
+    url: args["--url"] || "",
+    output: args["--output"] || "./src/types",
+    table: args["--table"]
+  });
+}
+main();
 //# sourceMappingURL=cli.js.map
