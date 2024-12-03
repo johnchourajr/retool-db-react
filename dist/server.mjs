@@ -2196,7 +2196,8 @@ function retoolDbHandler(_0, _1) {
     var _a;
     const sql = src_default(process.env.RETOOL_DATABASE_URL);
     try {
-      const { tableName } = params;
+      const resolvedParams = yield params;
+      const { tableName } = resolvedParams;
       if (!/^[a-zA-Z0-9_]+$/.test(tableName)) {
         throw new Error("Invalid table name format");
       }
