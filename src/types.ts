@@ -23,7 +23,7 @@ export type RetoolDatabaseError = {
   detail?: string;
 };
 
-export type RetoolContextParams = {
+export type RouteParams = {
   params: {
     tableName: string;
   };

@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import postgres from "postgres";
-import { RetoolContextParams, RetoolMutation } from "../types";
+import type { RetoolMutation, RouteParams } from "../types";
 
 export async function retoolDbHandler(
   req: NextRequest,
-  { params }: RetoolContextParams,
+  { params }: RouteParams,
 ): Promise<Response> {
   const sql = postgres(process.env.RETOOL_DATABASE_URL!);
 
   try {
-    const { tableName } = "then" in params ? await params : params;
+    const { tableName } = params;
 
     if (!/^[a-zA-Z0-9_]+$/.test(tableName)) {
       throw new Error("Invalid table name format");
