@@ -2228,6 +2228,12 @@ function osUsername() {
 function retoolDbHandler(_0, _1) {
   return __async(this, arguments, function* (req, { params }) {
     var _a;
+    if (!process.env.RETOOL_DATABASE_URL) {
+      return import_server.NextResponse.json(
+        { error: "Database connection URL is not configured" },
+        { status: 500 }
+      );
+    }
     const sql = src_default(process.env.RETOOL_DATABASE_URL);
     try {
       const { tableName } = yield params;
