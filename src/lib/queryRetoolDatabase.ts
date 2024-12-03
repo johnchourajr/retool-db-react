@@ -1,31 +1,26 @@
-import { Pool } from "pg";
+import postgres from "postgres";
 import { RetoolDatabaseOptions } from "../types";
 
 export async function queryRetoolDatabase<T>(
   tableName: string,
   options?: RetoolDatabaseOptions,
 ) {
-  const pool = new Pool({
-    connectionString: process.env.RETOOL_DATABASE_URL,
-  });
+  const sql = postgres(process.env.RETOOL_DATABASE_URL!);
 
   try {
     if (options?.query) {
-      const result = await pool.query({
-        text: options.query,
-        values: options.params || [],
-      });
-      return result.rows as T[];
+      const result = await sql.unsafe(
+        options.query,
+        (options.params as any[]) || [],
+      );
+      return result as unknown as T[];
     }
 
-    const result = await pool.query({
-      text: `SELECT * FROM "${tableName}" LIMIT $1`,
-      values: [options?.limit || 100],
-    });
-    return result.rows as T[];
-  } catch (error) {
-    throw error;
+    const result = await sql.unsafe(`SELECT * FROM "${tableName}" LIMIT $1`, [
+      options?.limit || 100,
+    ]);
+    return result as unknown as T[];
   } finally {
-    await pool.end();
+    await sql.end();
   }
 }
