@@ -9,7 +9,8 @@ export async function retoolDbHandler(
   const sql = postgres(process.env.RETOOL_DATABASE_URL!);
 
   try {
-    const { tableName } = params;
+    const resolvedParams = await params;
+    const { tableName } = resolvedParams;
 
     if (!/^[a-zA-Z0-9_]+$/.test(tableName)) {
       throw new Error("Invalid table name format");
