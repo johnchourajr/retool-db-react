@@ -1,4 +1,4 @@
-import { Pool } from "pg";
+import postgres from "postgres";
 
 interface ColumnInfo {
   column_name: string;
@@ -30,25 +30,25 @@ const pgToTsType = (pgType: string, isNullable: boolean): string => {
 
 export async function generateTableTypes(
   tableName: string,
-  pool: Pool,
-): Promise<string> {
-  const query = `
-    SELECT column_name, data_type, is_nullable
-    FROM information_schema.columns
-    WHERE table_name = $1
-    ORDER BY ordinal_position;
-  `;
-
-  const result = await pool.query<ColumnInfo>(query, [tableName]);
-  const columns = result.rows;
+  sql: postgres.Sql<{}>,
+) {
+  const result = await sql.unsafe(
+    `
+   SELECT column_name, data_type, is_nullable
+   FROM information_schema.columns
+   WHERE table_name = $1
+   ORDER BY ordinal_position
+ `,
+    [tableName],
+  );
 
   let typeDefinition = `export interface ${tableName.charAt(0).toUpperCase() + tableName.slice(1)} {\n`;
 
-  columns.forEach((col) => {
+  for (const col of result) {
     const isNullable = col.is_nullable === "YES";
     const tsType = pgToTsType(col.data_type, isNullable);
     typeDefinition += `  ${col.column_name}: ${tsType};\n`;
-  });
+  }
 
   typeDefinition += "}";
   return typeDefinition;

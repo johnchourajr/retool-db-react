@@ -20,7 +20,7 @@ export default defineConfig([
     outDir: "dist",
     sourcemap: true,
     platform: "node",
-    noExternal: ["events", "pg"],
+    noExternal: ["events", "postgres"],
   },
   {
     entry: ["src/cli.ts"],
@@ -30,7 +30,7 @@ export default defineConfig([
     outDir: "dist",
     sourcemap: true,
     platform: "node",
-    noExternal: ["events", "pg"],
+    noExternal: ["events", "postgres"],
     banner: { js: "#!/usr/bin/env node" },
     esbuildOptions: (options) => {
       options.charset = "utf8";

@@ -21,3 +21,9 @@ export type RetoolDatabaseError = {
   code?: string;
   detail?: string;
 };
+
+export type RetoolContextParams = {
+  params: {
+    tableName: string;
+  };
+};
