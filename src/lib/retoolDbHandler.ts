@@ -6,6 +6,13 @@ export async function retoolDbHandler(
   req: NextRequest,
   { params }: { params: Promise<{ tableName: string }> },
 ): Promise<Response> {
+  if (!process.env.RETOOL_DATABASE_URL) {
+    return NextResponse.json(
+      { error: "Database connection URL is not configured" },
+      { status: 500 },
+    );
+  }
+
   const sql = postgres(process.env.RETOOL_DATABASE_URL!);
 
   try {
