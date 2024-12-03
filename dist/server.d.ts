@@ -5,13 +5,13 @@ type RetoolDatabaseOptions = {
     params?: unknown[];
     limit?: number;
 };
-type RetoolContextParams = {
+type RouteParams = {
     params: {
         tableName: string;
     };
 };
 
-declare function retoolDbHandler(req: NextRequest, { params }: RetoolContextParams): Promise<Response>;
+declare function retoolDbHandler(req: NextRequest, { params }: RouteParams): Promise<Response>;
 
 declare function queryRetoolDatabase<T>(tableName: string, options?: RetoolDatabaseOptions): Promise<T[]>;
 
