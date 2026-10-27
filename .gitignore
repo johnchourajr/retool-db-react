@@ -4,5 +4,5 @@ node_modules
 .env
 .env.*
 .local
-muybuen-retool-db-react-*
+bueno-dev-retool-db-react-*
 example

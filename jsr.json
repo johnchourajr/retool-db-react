@@ -1,5 +1,5 @@
 {
-  "name": "@muybuen/buen-retool-db",
+  "name": "@bueno-dev/retool-db-react",
   "version": "1.0.0",
   "exports": "./src/index.ts",
   "publish": {

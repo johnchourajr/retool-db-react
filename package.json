@@ -1,5 +1,5 @@
 {
-  "name": "@muybuen/retool-db-react",
+  "name": "@bueno-dev/retool-db-react",
   "version": "1.1.24",
   "author": "John Choura",
   "license": "MIT",
@@ -25,12 +25,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnchourajr/retool-db-react.git"
+    "url": "git+https://github.com/johnchourajr/bueno-retool-db-react.git"
   },
   "bugs": {
-    "url": "https://github.com/johnchourajr/retool-db-react/issues"
+    "url": "https://github.com/johnchourajr/bueno-retool-db-react/issues"
   },
-  "homepage": "https://github.com/johnchourajr/retool-db-react#readme",
+  "homepage": "https://github.com/johnchourajr/bueno-retool-db-react#readme",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",

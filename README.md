@@ -1,13 +1,13 @@
-# @muybuen/retool-db-react
+# @bueno-dev/retool-db-react
 
 <img width="1200" alt="og" src="https://github.com/user-attachments/assets/b7d52c88-5336-40f6-8d42-644afaf8f2b6">
 
-[![npm version](https://badge.fury.io/js/%40muybuen%2Fretool-db-react.svg)](https://badge.fury.io/js/%40muybuen%2Fretool-db-react)
+[![npm version](https://badge.fury.io/js/%40bueno-dev%2Fretool-db-react.svg)](https://badge.fury.io/js/%40bueno-dev%2Fretool-db-react)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![npm downloads](https://img.shields.io/npm/dm/@muybuen/retool-db-react.svg)](https://www.npmjs.com/package/@muybuen/retool-db-react)
+[![npm downloads](https://img.shields.io/npm/dm/@bueno-dev/retool-db-react.svg)](https://www.npmjs.com/package/@bueno-dev/retool-db-react)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/johnchourajr/retool-db-react/graphs/commit-activity)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/johnchourajr/bueno-retool-db-react/graphs/commit-activity)
 
 ----
 
@@ -16,7 +16,7 @@ A TypeScript first React hook for working with Retool PostgreSQL databases in Ne
 ## Installation
 
 ```bash
-npm install @muybuen/retool-db-react
+npm install @bueno-dev/retool-db-react
 ```
 
 ## Usage
@@ -31,7 +31,7 @@ RETOOL_DATABASE_URL=postgresql://user:password@host:port/database
 2. Create API route handler:
 ```typescript
 // app/api/retool-db/[tableName]/route.ts
-import { retoolDbHandler } from '@muybuen/retool-db-react/server';
+import { retoolDbHandler } from '@bueno-dev/retool-db-react/server';
 
 export { retoolDbHandler as POST, retoolDbHandler as PUT, retoolDbHandler as DELETE };
 ```
@@ -44,7 +44,7 @@ npx retool-db-types --url=$RETOOL_DATABASE_URL
 ### Client Components
 
 ```typescript
-import { useRetoolDatabase } from '@muybuen/retool-db-react';
+import { useRetoolDatabase } from '@bueno-dev/retool-db-react';
 import { Users } from './types';
 
 // Basic Query
@@ -85,7 +85,7 @@ function UserForm() {
 ### Server Components
 
 ```typescript
-import { queryRetoolDatabase } from '@muybuen/retool-db-react/server';
+import { queryRetoolDatabase } from '@bueno-dev/retool-db-react/server';
 
 export default async function UsersPage() {
   const users = await queryRetoolDatabase<User>('users', {
@@ -142,7 +142,7 @@ interface RetoolDatabaseReturn<T> {
 
 ## Contributing
 
-This project is maintained by John Choura. See [CONTRIBUTORS](https://github.com/johnchourajr/retool-db-react/blob/main/CONTRIBUTORS.md) for contributing guidelines.
+This project is maintained by John Choura. See [CONTRIBUTORS](https://github.com/johnchourajr/bueno-retool-db-react/blob/main/CONTRIBUTORS.md) for contributing guidelines.
 
 ## License
 
