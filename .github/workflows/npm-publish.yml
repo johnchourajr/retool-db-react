@@ -8,6 +8,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # Lets npm trusted publishing exchange the OIDC token for a publish credential
 
     steps:
       # Step 1: Check out the code from the repository
@@ -18,7 +21,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18" # Use the Node.js version compatible with your package
+          node-version: "24" # Ships npm 11, which trusted publishing needs
           registry-url: "https://registry.npmjs.org/" # NPM registry URL
 
       # Step 3: Install dependencies and build the package
@@ -30,5 +33,3 @@ jobs:
       # Step 4: Publish the package to NPM
       - name: Publish to NPM
         run: npm publish --access public # Publish the package to NPM
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Use the NPM token from GitHub Secrets
